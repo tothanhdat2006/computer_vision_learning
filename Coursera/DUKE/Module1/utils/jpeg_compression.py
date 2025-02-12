@@ -1,11 +1,9 @@
 import numpy as np
 
-import cv2
-
 # O(nm) time complexity
 def get_blocks(img: np.ndarray, block_size: int=8) -> np.ndarray:
     blocks = []
-    if(img.shape[0] % block_size != 0 or img.shape[1] % block_size != 0):
+    if img.shape[0] % block_size != 0 or img.shape[1] % block_size != 0:
         pad_row = block_size - img.shape[0] % block_size
         pad_col = block_size - img.shape[1] % block_size
         img = np.pad(img, ((0, pad_row), (0, pad_col)), mode="constant")
@@ -48,6 +46,7 @@ def forward_transformation(block: np.ndarray, type: str="DCT") -> np.ndarray:
 
 # O(1) time complexity
 def quantization(block: np.ndarray, type: str="normal", quantization_table_custom: np.ndarray=None) -> np.ndarray:
+    quantization_table = []
     if type == "normal":
         quantization_table = np.array([[16, 11, 10, 16, 24, 40, 51, 61],
                                         [12, 12, 14, 19, 26, 58, 60, 55],
@@ -61,4 +60,5 @@ def quantization(block: np.ndarray, type: str="normal", quantization_table_custo
         if quantization_table_custom is None:
             raise ValueError("quantization_table_custom must be provided")
         quantization_table = quantization_table_custom
+        
     return np.round(np.divide(block, quantization_table))
