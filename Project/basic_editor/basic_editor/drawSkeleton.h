@@ -2,5 +2,12 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window/VideoMode.hpp>
 
-void drawWorkingSpace(sf::RenderWindow& window, unsigned int& windowWidth, unsigned int& windowHeight);
+class WorkingSpace
+{
+private:
+public:
+	WorkingSpace();
+	~WorkingSpace();
+	void drawWorkingSpace(sf::RenderWindow& window, unsigned int windowWidth, unsigned int windowHeight);
+};
 

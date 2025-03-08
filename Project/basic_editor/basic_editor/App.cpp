@@ -16,6 +16,24 @@ void App::initImages()
 	images = new Images({ windowWidth, windowHeight });
 }
 
+void App::initButtons()
+{
+	// Sample code to create a button
+	buttons = new UI::Button({ 0, 0 }, { 100, 100 }, sf::Color::White);
+}
+
+void App::initTextboxs()
+{
+	// Sample code to create a textbox
+	textboxes = new UI::Textbox({ 0, 0 }, { 100, 100 }, sf::Color::White);
+}
+
+void App::initFrames()
+{
+	// Sample code to create a frame
+	frame = new UI::Frame({ 0, 0 }, { 100, 100 }, sf::Color::White, nullptr, nullptr, images);
+}
+
 void App::pollEvents()
 {
 	while (const std::optional event = window->pollEvent())
@@ -52,7 +70,6 @@ void App::updating()
 void App::rendering()
 {
 	window->clear();
-	//drawWorkingSpace(*window, windowWidth, windowHeight);
 	window->draw(images->getSprite());
 	window->display();
 }
