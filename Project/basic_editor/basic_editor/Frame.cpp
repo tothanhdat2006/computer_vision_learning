@@ -2,7 +2,7 @@
 
 namespace UI
 {
-	Frame::Frame(sf::Vector2u framePos, sf::Vector2u frameSize, sf::Color frameColor)
+	Frame::Frame(sf::Vector2f framePos, sf::Vector2f frameSize, sf::Color frameColor)
 	{
 		this->framePos = framePos;
 		this->frameSize = frameSize;
@@ -24,11 +24,12 @@ namespace UI
 		images = nullptr;
 	}
 
-    void Frame::drawFrame(sf::RenderWindow& window, unsigned int x, unsigned int y)
+    void Frame::draw(sf::RenderWindow& window)
     {
         sf::RectangleShape rectangle(sf::Vector2f(frameSize.x, frameSize.y));
         rectangle.setFillColor(frameColor);
-		rectangle.setPosition({ x + framePos.x, y + framePos.y });
+		rectangle.setPosition(sf::Vector2f(framePos.x, framePos.y));
+		rectangle.setOutlineThickness(1);
         window.draw(rectangle);
     }
 

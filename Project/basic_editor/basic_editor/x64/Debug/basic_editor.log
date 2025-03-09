@@ -6,4 +6,22 @@ D:\MachineLearning\Notebook\computer_vision_learning\Project\basic_editor\Extern
       D:\MachineLearning\Notebook\computer_vision_learning\Project\basic_editor\External\SFML\include\SFML\System\Exception.hpp(41,23):
       see declaration of 'sf::Exception'
   
+D:\MachineLearning\Notebook\computer_vision_learning\Project\basic_editor\basic_editor\App.cpp(31,19): warning C4834: discarding return value of function with [[nodiscard]] attribute
+  Frame.cpp
+D:\MachineLearning\Notebook\computer_vision_learning\Project\basic_editor\External\SFML\include\SFML\System\Exception.hpp(41,47): warning C4275: non dll-interface class 'std::runtime_error' used as base for dll-interface class 'sf::Exception'
+  (compiling source file 'Frame.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\stdexcept(100,19):
+      see declaration of 'std::runtime_error'
+      D:\MachineLearning\Notebook\computer_vision_learning\Project\basic_editor\External\SFML\include\SFML\System\Exception.hpp(41,23):
+      see declaration of 'sf::Exception'
+  
+  main.cpp
+D:\MachineLearning\Notebook\computer_vision_learning\Project\basic_editor\External\SFML\include\SFML\System\Exception.hpp(41,47): warning C4275: non dll-interface class 'std::runtime_error' used as base for dll-interface class 'sf::Exception'
+  (compiling source file 'main.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.43.34808\include\stdexcept(100,19):
+      see declaration of 'std::runtime_error'
+      D:\MachineLearning\Notebook\computer_vision_learning\Project\basic_editor\External\SFML\include\SFML\System\Exception.hpp(41,23):
+      see declaration of 'sf::Exception'
+  
+  Generating Code...
   basic_editor.vcxproj -> D:\MachineLearning\Notebook\computer_vision_learning\Project\basic_editor\x64\Debug\basic_editor.exe

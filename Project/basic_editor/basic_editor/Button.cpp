@@ -4,7 +4,7 @@
 
 namespace UI
 {
-	Button::Button(sf::Vector2u buttonPos, sf::Vector2u buttonSize) : buttonText(buttonFont)
+	Button::Button(sf::Vector2f buttonPos, sf::Vector2f buttonSize) : buttonText(buttonFont)
 	{
 		this->buttonPos = buttonPos;
 		this->buttonSize = buttonSize;
@@ -25,13 +25,33 @@ namespace UI
 		buttonText.setFillColor(sf::Color::Black);
 	}
 
-	void Button::drawButton(sf::RenderWindow& window, unsigned int x, unsigned int y)
+	std::string Button::getText()
+	{
+		return buttonText.getString();
+	}
+
+	void Button::setColor(sf::Color color)
+	{
+		buttonColor = color;
+	}
+
+	void Button::setText(std::string text)
+	{
+		buttonText.setString(text);
+	}
+
+	void Button::setFont(sf::Font font)
+	{
+		buttonFont = font;
+	}
+
+	void Button::draw(sf::RenderWindow& window)
 	{
 		sf::RectangleShape rectangle(sf::Vector2f(buttonSize.x, buttonSize.y));
 		rectangle.setFillColor(buttonColor);
-		rectangle.setPosition({ x + buttonPos.x, y + buttonPos.y });
+		rectangle.setPosition(sf::Vector2f(buttonPos.x, buttonPos.y));
 		window.draw(rectangle);
-		buttonText.setPosition({ x + buttonPos.x + 10, y + buttonPos.y + 10 });
+		buttonText.setPosition(sf::Vector2f(buttonPos.x + 10, buttonPos.y + 10));
 		window.draw(buttonText);
 	}
 }

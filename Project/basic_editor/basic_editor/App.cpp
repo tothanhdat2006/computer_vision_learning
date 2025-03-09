@@ -1,39 +1,106 @@
+#include <iostream>
+
 #include "App.h"
-#include "drawSkeleton.h"
 #include "Images.h"
 
+/*------------------------------Init------------------------------*/
 void App::initWindow()
 {
-	windowWidth = 1000;
-	windowHeight = 1000;
-	vm = sf::VideoMode({ windowWidth, windowHeight });
-	window = new sf::RenderWindow(vm, "Basic editor app");
-	window->setFramerateLimit(60);
+	this->windowSize = { 1280, 720 };
+	this->vm = sf::VideoMode(this->windowSize);
+	window = new sf::RenderWindow(this->vm, "Basic editor app");
+	window->setFramerateLimit(24);
 }
 
 void App::initImages()
 {
-	images = new Images({ windowWidth, windowHeight });
+	this->images = new Images(this->windowSize);
 }
 
 void App::initButtons()
 {
-	// Sample code to create a button
-	buttons = new UI::Button({ 0, 0 }, { 100, 100 }, sf::Color::White);
+	this->buttons = new UI::Button[5]{
+		UI::Button({0, 0}, {100, 50}),
+		UI::Button({0, 60}, {100, 50}),
+		UI::Button({0, 120}, {100, 50}),
+		UI::Button({0, 180}, {100, 50}),
+		UI::Button({0, 240}, {100, 50})
+	};
+
+	sf::Font font;
+	font.openFromFile("./fonts/consolas/CONSOLA.TTF");
+
+	for (int i = 0; i < 5; ++i)
+	{
+		buttons[i].setColor(sf::Color::White);
+		buttons[i].setText("Button " + std::to_string(i));
+		buttons[i].setFont(font);
+	}
 }
 
 void App::initTextboxs()
 {
-	// Sample code to create a textbox
-	textboxes = new UI::Textbox({ 0, 0 }, { 100, 100 }, sf::Color::White);
+	this->textboxes = new UI::Textbox[5]{
+		UI::Textbox({0, 300}, {100, 50}),
+		UI::Textbox({0, 360}, {100, 50}),
+		UI::Textbox({0, 420}, {100, 50}),
+		UI::Textbox({0, 480}, {100, 50}),
+		UI::Textbox({0, 540}, {100, 50})
+	};
 }
 
 void App::initFrames()
 {
-	// Sample code to create a frame
-	frame = new UI::Frame({ 0, 0 }, { 100, 100 }, sf::Color::White, nullptr, nullptr, images);
+	/*
+	UI::Frame 0: Upper bar
+	UI::Frame 1: Left tools bar
+	UI::Frame 2: Middle working space
+	UI::Frame 3: Right properties bar
+	UI::Frame 4: Bottom status bar
+	*/
+	
+	this->frames = new UI::Frame[5]{
+		UI::Frame({0, 0},
+				 {static_cast<float>(this->windowSize.x), static_cast<float>(0.1 * this->windowSize.y)},
+				 { 0, 24, 143 }),
+
+		UI::Frame({0, static_cast<float>(0.1 * this->windowSize.y)},
+				 {static_cast<float>(0.2 * this->windowSize.x), static_cast<float>(0.8 * this->windowSize.y)},
+				 { 0, 24, 143 }),
+
+		UI::Frame({static_cast<float>(0.2 * this->windowSize.x), static_cast<float>(0.1 * this->windowSize.y)},
+				 {static_cast<float>(0.6 * this->windowSize.x), static_cast<float>(0.8 * this->windowSize.y)},
+				 { 0, 24, 143 }),
+
+		UI::Frame({static_cast<float>(0.8 * this->windowSize.x), static_cast<float>(0.1 * this->windowSize.y)},
+				 {static_cast<float>(0.2 * this->windowSize.x), static_cast<float>(0.8 * this->windowSize.y)},
+				 { 0, 24, 143 }),
+
+		UI::Frame({0, static_cast<float>(0.9 * this->windowSize.y)},
+				 {static_cast<float>(this->windowSize.x), static_cast<float>(0.1 * this->windowSize.y)},
+				 { 0, 24, 143 })
+	};
 }
 
+void App::initUI()
+{
+	initButtons();
+	initTextboxs();
+	initFrames();
+}
+
+void App::drawUI()
+{
+	for (int i = 0; i < 5; i++)
+	{
+		this->frames[i].draw(*(this->window));
+		//this->buttons[i].draw(*(this->window));
+		//this->textboxes[i].draw(*(this->window));
+	}
+}
+
+
+/*------------------------------Events------------------------------*/
 void App::pollEvents()
 {
 	while (const std::optional event = window->pollEvent())
@@ -45,6 +112,11 @@ void App::pollEvents()
 			if (keyPressed->scancode == sf::Keyboard::Scancode::Escape)
 				window->close();
 		}
+		else if (const auto* mouseClicked = event->getIf<sf::Event::MouseButtonPressed>())
+		{
+			std::cout << "Mouse clicked at: " << mouseClicked->position.x << ", " << mouseClicked->position.y << std::endl;
+		}
+
 	}
 }
 
@@ -52,45 +124,38 @@ void App::updating()
 {
 	pollEvents();
 
-	// Sample code to draw a checkerboard pattern
-	for (unsigned int y = 0; y < windowHeight; y++)
-	{
-		for (unsigned int x = 0; x < windowWidth; x++)
-		{
-			std::uint8_t c = (x & y) ^ x; 
-			c *= 255;
-			sf::Color color = sf::Color(c, c, c);
-
-			images->setPixel({ x, y }, color);
-		}
-	}
-	images->updateTexture();
 }
 
 void App::rendering()
 {
-	window->clear();
-	window->draw(images->getSprite());
-	window->display();
+	this->window->clear();
+	drawUI();
+	this->window->display();
 }
 
 void App::running()
 {
-	while (window->isOpen())
+	while (this->window->isOpen())
 	{
 		updating();
 		rendering();
 	}
 }
 
+
+/*------------------------------Constructor & Destructor------------------------------*/
 App::App()
 {
 	initWindow();
 	initImages();
+	initUI();
 }
 
 App::~App()
 {
-	delete window;
-	delete images;
+	delete this->window;
+	delete this->images;
+	delete[] this->buttons;
+	delete[] this->textboxes;
+	delete[] this->frames;
 }

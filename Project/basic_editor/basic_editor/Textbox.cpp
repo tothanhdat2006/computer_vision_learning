@@ -4,7 +4,7 @@
 
 namespace UI
 {
-	Textbox::Textbox(sf::Vector2u textboxPos, sf::Vector2u textboxSize) : textboxText(textboxFont)
+	Textbox::Textbox(sf::Vector2f textboxPos, sf::Vector2f textboxSize) : textboxText(textboxFont)
 	{
 		this->textboxPos = textboxPos;
 		this->textboxSize = textboxSize;
@@ -25,11 +25,11 @@ namespace UI
 		textboxText.setString("Test button");
 	}
 
-	void Textbox::drawTextbox(sf::RenderWindow& window)
+	void Textbox::draw(sf::RenderWindow& window)
 	{
 		sf::RectangleShape rectangle(sf::Vector2f(textboxSize.x, textboxSize.y));
 		rectangle.setFillColor(textboxColor);
-		rectangle.setPosition({ textboxPos.x, textboxPos.y });
+		rectangle.setPosition(sf::Vector2f(textboxPos.x, textboxPos.y));
 		window.draw(rectangle);
 		window.draw(textboxText);
 	}

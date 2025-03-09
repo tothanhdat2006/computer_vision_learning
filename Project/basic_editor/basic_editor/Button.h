@@ -6,15 +6,19 @@ namespace UI
 	class Button
 	{
 	private:
-		sf::Vector2u buttonPos;
-		sf::Vector2u buttonSize;
+		sf::Vector2f buttonPos;
+		sf::Vector2f buttonSize;
 		sf::Color buttonColor;
 		sf::Text buttonText;
 		sf::Font buttonFont;
 		void initContent();
 	public:
-		Button(sf::Vector2u buttonPos, sf::Vector2u buttonSize);
+		Button(sf::Vector2f buttonPos, sf::Vector2f buttonSize);
 		~Button();
-		void drawButton(sf::RenderWindow& window, unsigned int x, unsigned int y);
+		void draw(sf::RenderWindow& window);
+		std::string getText();
+		void setColor(sf::Color color);
+		void setText(std::string text);
+		void setFont(sf::Font font);
 	};
 }

@@ -144,9 +144,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Frame.cpp" />
     <ClCompile Include="Images.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="drawSkeleton.cpp" />
+    <ClCompile Include="Textbox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="fonts\consolas\CONSOLA.TTF" />
@@ -157,8 +159,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
-    <ClInclude Include="drawSkeleton.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="Frame.h" />
     <ClInclude Include="Images.h" />
+    <ClInclude Include="Textbox.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

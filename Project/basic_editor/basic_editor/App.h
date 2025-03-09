@@ -1,7 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-#include "drawSkeleton.h"
 #include "Images.h"
 #include "Frame.h"
 #include "Textbox.h"
@@ -10,8 +9,7 @@
 class App
 {
 private:
-	unsigned int windowWidth;
-	unsigned int windowHeight;
+	sf::Vector2u windowSize;
 	sf::VideoMode vm;
 	sf::RenderWindow* window;
 	
@@ -25,6 +23,9 @@ private:
 	void initButtons();
 	void initTextboxs();
 	void initFrames();
+
+	void initUI();
+	void drawUI();
 
 	void pollEvents();
 

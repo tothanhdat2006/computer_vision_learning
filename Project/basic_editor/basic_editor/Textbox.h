@@ -6,15 +6,15 @@ namespace UI
 	class Textbox
 	{
 	private:
-		sf::Vector2u textboxPos;
-		sf::Vector2u textboxSize;
+		sf::Vector2f textboxPos;
+		sf::Vector2f textboxSize;
 		sf::Color textboxColor;
 		sf::Text textboxText;
 		sf::Font textboxFont;
 		void initContent();
 	public:
-		Textbox(sf::Vector2u textboxPos, sf::Vector2u textboxSize);
+		Textbox(sf::Vector2f textboxPos, sf::Vector2f textboxSize);
 		~Textbox();
-		void drawTextbox(sf::RenderWindow& window);
+		void draw(sf::RenderWindow& window);
 	};
 }
